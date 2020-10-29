@@ -175,6 +175,8 @@ pub fn schedule_runner_system(mut world: &mut World, mut resources: &mut Resourc
         schedule.run(&mut world, &mut resources);
     }
     for (entity, mut runner) in &mut world.query_mut::<(Entity, &mut ScheduleRunner)>().iter() {
-        runner.0 = entity_map.remove(&entity).unwrap();
+        if let Some(schedule) = entity_map.remove(&entity) {
+            runner.0 = schedule;
+        }
     }
 }
