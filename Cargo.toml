@@ -1,6 +1,6 @@
 [package]
 name = "bevy_contrib_schedules"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Sean Kaufman <sean.kaufman92@gmail.com>"]
 edition = "2018"
 license = "cc0"

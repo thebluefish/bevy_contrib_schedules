@@ -168,13 +168,12 @@ pub fn schedule_runner_system(mut world: &mut World, mut resources: &mut Resourc
     // Run it as a component
     // We take all components, run them, put them back
     let mut entity_map: HashMap<Entity, PackedSchedule> = world.query_mut::<(Entity, &mut ScheduleRunner)>()
-        .iter()
         .map(|(entity, mut runner)| (entity, std::mem::take(&mut runner.0)))
         .collect();
     for (_, schedule) in entity_map.iter_mut() {
         schedule.run(&mut world, &mut resources);
     }
-    for (entity, mut runner) in &mut world.query_mut::<(Entity, &mut ScheduleRunner)>().iter() {
+    for (entity, mut runner) in &mut world.query_mut::<(Entity, &mut ScheduleRunner)>() {
         runner.0 = entity_map.remove(&entity).unwrap();
     }
 }
